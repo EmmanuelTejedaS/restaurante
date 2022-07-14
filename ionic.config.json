@@ -1,0 +1,7 @@
+{
+  "name": "makos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

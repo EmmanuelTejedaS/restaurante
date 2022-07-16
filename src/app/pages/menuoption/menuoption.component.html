@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+          <ion-title ion-title class="titulo ion-text-wrap">
+           Carta  
+          </ion-title>
+
+          <ion-buttons slot="start">
+              <ion-button (click)="openMenu()">
+                  <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+              </ion-button>
+              <!-- <ion-back-button defaultHref="/"></ion-back-button> -->
+          </ion-buttons>
+          
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  
+  <ion-card class="fondo">
+    <div class="asd">
+      <ion-card-content [routerLink]="['/home']">
+        bebidas
+      </ion-card-content>
+    </div>
+  </ion-card>
+
+  <ion-card class="fondo">
+    <div class="asd">
+      <ion-card-content [routerLink]="['/postres']">
+    postres
+      </ion-card-content>
+    </div>
+  </ion-card>
+
+  <ion-card class="fondo">
+    <div class="asd">
+      <ion-card-content [routerLink]="['/bebidas']">
+    hamburguesas
+      </ion-card-content>
+    </div>
+  </ion-card>
+
+</ion-content>

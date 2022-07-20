@@ -23,10 +23,10 @@
           <ion-button (click)="nuevoPostres()" size="small" color="dark" >postres</ion-button>
         </ion-col>
         <ion-col class="normal text-center" size="4">
-          <ion-button (click)="nuevo()" size="small" color="dark" (click)="path = 'hamburguesas' ">hamburguesas</ion-button>
+          <ion-button (click)="nuevoBebidas()" size="small" color="dark" (click)="path = 'hamburguesas' ">hamburguesas</ion-button>
         </ion-col>
         <ion-col class="normal text-center" size="4">
-          <ion-button (click)="nuevo()" size="small" color="dark" >producto 3</ion-button>
+          <ion-button (click)="nuevoQuesadillas()" size="small" color="dark" >Quesadillas</ion-button>
         </ion-col>
     </ion-row>
 
@@ -191,6 +191,147 @@
   </ion-button>
 
       <ion-button (click)="deletePostres(postres)" >
+          <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+</ion-item>
+
+</div>
+
+
+<div *ngIf="enableNewBebidas">
+        
+  <h3 class="subtitulo encabezado">Ingrese datos dela hamburguesa</h3>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Nombre:
+    </ion-label>
+    <ion-input [(ngModel)]="newBebidas.nombre" class="normal" type="text" inputmode="text" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Precio:
+    </ion-label>
+    <ion-input [(ngModel)]="newBebidas.precio" class="normal" type="number" inputmode="numeric" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="normal">
+    foto
+</ion-label>
+<ion-buttons slot="end">
+<ion-button>
+<label for="file-upload">
+  <ion-icon slot="icon-only" name="images"></ion-icon>
+</label>
+ <input (change)="newImageUploadBebidas($event)" id="file-upload" style="display: none" type="file"  accept="image/*" required="true">
+</ion-button>
+</ion-buttons>
+
+</ion-item>
+
+<ion-item>
+  <img class="image" [src]="newBebidas.foto">
+</ion-item>
+
+  <ion-item>
+    <ion-buttons slot="end">
+        <ion-label class="normal"> Cancelar </ion-label>
+      <ion-button (click)="enableNewBebidas = false">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-label  class="normal"> Guardar postre</ion-label>
+       <ion-button (click)="guardarBebidas() ">
+        <ion-icon color="primary" slot="icon-only" name="save-sharp"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <h3 class="subtitulo encabezado">lista de hamburguesas</h3>
+
+<ion-item *ngFor="let bebidas of bebidas ">
+  <ion-label class="normal">{{bebidas.nombre}}</ion-label>
+  <ion-buttons slot="end">
+    <ion-button (click)="newBebidas = bebidas; enableNewBebidas=true;">
+      <ion-icon  slot="icon-only" name="create-outline"></ion-icon>
+  </ion-button>
+
+      <ion-button (click)="deleteBebidas(bebidas)" >
+          <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+</ion-item>
+
+</div>
+
+<!-- quesadillas -->
+
+<div *ngIf="enableNewQuesadillas">
+        
+  <h3 class="subtitulo encabezado">Ingrese datos dela quesadilla</h3>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Nombre:
+    </ion-label>
+    <ion-input [(ngModel)]="newQuesadillas.nombre" class="normal" type="text" inputmode="text" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Precio:
+    </ion-label>
+    <ion-input [(ngModel)]="newQuesadillas.precio" class="normal" type="number" inputmode="numeric" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="normal">
+    foto
+</ion-label>
+<ion-buttons slot="end">
+<ion-button>
+<label for="file-upload">
+  <ion-icon slot="icon-only" name="images"></ion-icon>
+</label>
+ <input (change)="newImageUploadQuesadillas($event)" id="file-upload" style="display: none" type="file"  accept="image/*" required="true">
+</ion-button>
+</ion-buttons>
+
+</ion-item>
+
+<ion-item>
+  <img class="image" [src]="newQuesadillas.foto">
+</ion-item>
+
+  <ion-item>
+    <ion-buttons slot="end">
+        <ion-label class="normal"> Cancelar </ion-label>
+      <ion-button (click)="enableNewQuesadillas = false">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-label  class="normal"> Guardar quesadilla</ion-label>
+       <ion-button (click)="guardarQuesadillas() ">
+        <ion-icon color="primary" slot="icon-only" name="save-sharp"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <h3 class="subtitulo encabezado">lista de quesadillas</h3>
+
+<ion-item *ngFor="let quesadillas of quesadillas ">
+  <ion-label class="normal">{{quesadillas.nombre}}</ion-label>
+  <ion-buttons slot="end">
+    <ion-button (click)="newQuesadillas = quesadillas; enableNewQuesadillas=true;">
+      <ion-icon  slot="icon-only" name="create-outline"></ion-icon>
+  </ion-button>
+
+      <ion-button (click)="deleteQuesadillas(quesadillas)" >
           <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
       </ion-button>
   </ion-buttons>

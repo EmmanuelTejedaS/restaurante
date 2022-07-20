@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
           <ion-title class="titulo ion-text-wrap">
-           hamburguesas
+           Quesadillas
           </ion-title>
           <ion-buttons slot="start">
             <ion-button (click)="salirDeCarrit()" >
@@ -12,8 +12,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let bebidas of bebidas">
-    <app-producto [producto]= bebidas></app-producto>
+  <div *ngFor="let quesadillas of quesadillas">
+    <app-producto [producto]= quesadillas></app-producto>
   </div>
 
 </ion-content>

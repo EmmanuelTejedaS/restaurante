@@ -9,6 +9,7 @@ import { ComponentesModule } from '../componentes/componentes.module';
 import { PostresComponent } from './postres/postres.component';
 import { MenuoptionComponent } from './menuoption/menuoption.component';
 import { BebidasComponent } from './bebidas/bebidas.component';
+import { QuesadillasComponent } from './quesadillas/quesadillas.component';
 
 
 
@@ -18,7 +19,8 @@ import { BebidasComponent } from './bebidas/bebidas.component';
     PerfilComponent,
     PostresComponent,
     MenuoptionComponent,
-    BebidasComponent
+    BebidasComponent,
+    QuesadillasComponent
   ],
   imports: [
     CommonModule,

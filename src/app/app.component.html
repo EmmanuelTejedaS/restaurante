@@ -17,6 +17,13 @@
           </ion-item>
         </ion-menu-toggle>
 
+        <ion-menu-toggle autoHide=false *ngIf="admin">
+          <ion-item  button=true detail=true [routerLink]="['/config-productos']">
+            <ion-label class="normal">Configuracion de productos</ion-label>
+            <ion-icon slot="start"  name="settings-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
         <ion-menu-toggle autoHide=false >
           <ion-item  button=true detail=true [routerLink]="['/menuoption']">
             <ion-label class="normal">Carta</ion-label>
@@ -27,28 +34,127 @@
         <ion-menu-toggle autoHide=false >
           <ion-item  button=true detail=true [routerLink]="['/home']">
             <ion-label class="normal">bebidas</ion-label>
-            <ion-icon slot="start"  name="storefront-outline"></ion-icon>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle autoHide=false >
           <ion-item  button=true detail=true [routerLink]="['/postres']">
             <ion-label class="normal">Postres</ion-label>
-            <ion-icon slot="start"  name="storefront-outline"></ion-icon>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
           </ion-item>
         </ion-menu-toggle>
 
         <ion-menu-toggle autoHide=false >
           <ion-item  button=true detail=true [routerLink]="['/bebidas']">
             <ion-label class="normal">hamburguesas</ion-label>
-            <ion-icon slot="start"  name="storefront-outline"></ion-icon>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
           </ion-item>
         </ion-menu-toggle>
 
-        <ion-menu-toggle autoHide=false *ngIf="admin">
-          <ion-item  button=true detail=true [routerLink]="['/config-productos']">
-            <ion-label class="normal">Configuracion de productos</ion-label>
-            <ion-icon slot="start"  name="settings-outline"></ion-icon>
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/quesadillas']">
+            <ion-label class="normal">Quesadillas</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Antojitos</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Snacks</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Ensaladas</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">hamburguesas</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">hamburguesas</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Frappes</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Tes</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Malteadas</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">crepas saladas</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Crepas Dulces o waffles</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Helados</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Hotdogs</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Desayunos</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide=false >
+          <ion-item  button=true detail=true [routerLink]="['/']">
+            <ion-label class="normal">Huevos al gusto</ion-label>
+            <ion-icon slot="start"  name="fast-food-outline"></ion-icon>
           </ion-item>
         </ion-menu-toggle>
       </ion-content>

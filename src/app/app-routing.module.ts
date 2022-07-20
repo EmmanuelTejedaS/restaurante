@@ -8,6 +8,7 @@ import { canActivate } from '@angular/fire/compat/auth-guard';
 import { PostresComponent } from './pages/postres/postres.component';
 import { MenuoptionComponent } from './pages/menuoption/menuoption.component';
 import { BebidasComponent } from './pages/bebidas/bebidas.component';
+import { QuesadillasComponent } from './pages/quesadillas/quesadillas.component';
 
 const isAdmin = (next: any) => map( (user: any) => !!user && 'tYBTvM5thidmtFMb82x82q1WdIU2' === user.uid);
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'postres', component: PostresComponent},
   { path: 'menuoption', component: MenuoptionComponent},
   { path: 'bebidas', component: BebidasComponent},
+  { path: 'quesadillas', component: QuesadillasComponent},
   { path: '**', redirectTo: 'menuoption', pathMatch: 'full'},
   {
     path: '',

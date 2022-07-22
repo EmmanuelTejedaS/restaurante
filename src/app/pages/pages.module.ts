@@ -10,6 +10,16 @@ import { PostresComponent } from './postres/postres.component';
 import { MenuoptionComponent } from './menuoption/menuoption.component';
 import { BebidasComponent } from './bebidas/bebidas.component';
 import { QuesadillasComponent } from './quesadillas/quesadillas.component';
+import { AntojitosComponent } from './antojitos/antojitos.component';
+import { SnacksComponent } from './snacks/snacks.component';
+import { EnsaladasComponent } from './ensaladas/ensaladas.component';
+import { FrappesComponent } from './frappes/frappes.component';
+import { TesComponent } from './tes/tes.component';
+import { MalteadasComponent } from './malteadas/malteadas.component';
+import { LicuadosComponent } from './licuados/licuados.component';
+import { CrepasComponent } from './crepas/crepas.component';
+import { WafflesComponent } from './waffles/waffles.component';
+import { HeladosComponent } from './helados/helados.component';
 
 
 
@@ -20,7 +30,17 @@ import { QuesadillasComponent } from './quesadillas/quesadillas.component';
     PostresComponent,
     MenuoptionComponent,
     BebidasComponent,
-    QuesadillasComponent
+    QuesadillasComponent,
+    AntojitosComponent,
+    SnacksComponent,
+    EnsaladasComponent,
+    FrappesComponent,
+    TesComponent,
+    MalteadasComponent,
+    LicuadosComponent,
+    CrepasComponent,
+    WafflesComponent,
+    HeladosComponent
   ],
   imports: [
     CommonModule,

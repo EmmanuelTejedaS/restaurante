@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+          <ion-title class="titulo ion-text-wrap">
+           Tes
+          </ion-title>
+          <ion-buttons slot="start">
+            <ion-button (click)="salirDeCarrit()" >
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+          </ion-button>
+          </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let tes of tes">
+    <app-producto [producto]= tes></app-producto>
+  </div>
+
+</ion-content>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { FirestoreService } from '../../services/firestore.service';
-import { Postres, Producto, Bebidas, Quesadillas } from '../../models';
+// eslint-disable-next-line max-len
+import { Postres, Producto, Bebidas, Quesadillas, Antojitos, Snacks, Ensaladas, Frappes, Tes, Malteadas, Licuados, Crepas, Waffles } from '../../models';
 import { FirestorageService } from '../../services/firestorage.service';
 
 @Component({
@@ -39,18 +40,92 @@ export class ConfigProductosComponent implements OnInit {
   newFileQuesadillas: '';
   pathQuesadillas = 'quesadillas/';
 
+  antojitos: Antojitos[] = [];
+  newAntojitos: Antojitos;
+  enableNewAntojitos = false;
+  newImageAntojitos = '';
+  newFileAntojitos: '';
+  pathAntojitos = 'antojitos/';
+
+  snacks: Snacks[] = [];
+  newSnacks: Snacks;
+  enableNewSnacks = false;
+  newImageSnacks = '';
+  newFileSnacks: '';
+  pathSnacks = 'snacks/';
+
+  ensaladas: Ensaladas[] = [];
+  newEnsaladas: Ensaladas;
+  enableNewEnsaladas = false;
+  newImageEnsaladas = '';
+  newFileEnsaladas: '';
+  pathEnsaladas = 'ensaladas/';
+
+  frappes: Frappes[] = [];
+  newFrappes: Frappes;
+  enableNewFrappes = false;
+  newImageFrappes= '';
+  newFileFrappes: '';
+  pathFrappes = 'frappes';
+
+  tes: Tes[] = [];
+  newTes: Tes;
+  enableNewTes = false;
+  newImageTes= '';
+  newFileTes: '';
+  pathTes = 'tes';
+
+  malteadas: Malteadas[] = [];
+  newMalteadas: Malteadas;
+  enableNewMalteadas = false;
+  newImageMalteadas= '';
+  newFileMalteadas: '';
+  pathMalteadas = 'malteadas';
+
+  licuados: Licuados[] = [];
+  newLicuados: Licuados;
+  enableNewLicuados = false;
+  newImageLicuados= '';
+  newFileLicuados: '';
+  pathLicuados = 'licuados';
+
+  crepas: Crepas[] = [];
+  newCrepas: Crepas;
+  enableNewCrepas = false;
+  newImageCrepas= '';
+  newFileCrepas: '';
+  pathCrepas = 'crepas';
+
+  waffles: Waffles[] = [];
+  newWaffles: Waffles;
+  enableNewWaffles = false;
+  newImageWaffles= '';
+  newFileWaffles: '';
+  pathWaffles= 'waffles';
+
+
   constructor(public menu: MenuController,
               public firestoreService: FirestoreService,
               public loadingController: LoadingController,
               public toastController: ToastController,
               public alertController: AlertController,
-              public firestorageService: FirestorageService) { }
+              public firestorageService: FirestorageService) {
+              }
 
   ngOnInit() {
     this.getProductos();
     this.getProductosPostres();
     this.getProductosBebidas();
     this.getProductosQuesadillas();
+    this.getProductosAntojitos();
+    this.getProductosSnacks();
+    this.getProductosEnsaladas();
+    this.getProductosFrappes();
+    this.getProductosTes();
+    this.getProductosMalteadas();
+    this.getProductosLicuados();
+    this.getProductosCrepas();
+    this.getProductosWaffles();
   }
 
   openMenu(){
@@ -98,7 +173,7 @@ export class ConfigProductosComponent implements OnInit {
       this.firestoreService.createDoc(this.newPostres,this.pathPostres,this.newPostres.id).then( res => {
         console.log('guardado con exito');
         this.presentToast('guardado con exito');
-        this.nuevo();
+        this.nuevoPostres();
         this.enableNewPostres = false;
         this.loading.dismiss();
       }).catch(   error => {
@@ -257,6 +332,8 @@ export class ConfigProductosComponent implements OnInit {
    }
   }
 
+  // bebidas
+
   async guardarBebidas() {
     const path = 'bebidas';
     const name = this.newBebidas.nombre;
@@ -271,7 +348,7 @@ export class ConfigProductosComponent implements OnInit {
       this.firestoreService.createDoc(this.newBebidas,this.pathBebidas,this.newBebidas.id).then( res => {
         console.log('guardado con exito');
         this.presentToast('guardado con exito');
-        this.nuevo();
+        this.nuevoBebidas();
         this.enableNewBebidas = false;
         this.loading.dismiss();
       }).catch(   error => {
@@ -369,7 +446,7 @@ async guardarQuesadillas() {
     this.firestoreService.createDoc(this.newQuesadillas,this.pathQuesadillas,this.newQuesadillas.id).then( res => {
       console.log('guardado con exito');
       this.presentToast('guardado con exito');
-      this.nuevo();
+      this.nuevoQuesadillas();
       this.enableNewQuesadillas = false;
       this.loading.dismiss();
     }).catch(   error => {
@@ -452,6 +529,941 @@ async newImageUploadQuesadillas(event: any) {
  }
 }
 
+// Antojitos
+
+async guardarAntojitos() {
+  const path = 'antojitos';
+  const name = this.newAntojitos.nombre;
+  const precio = this.newAntojitos.precio;
+  const foto = this.newAntojitos.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileAntojitos, path, name);
+    this.newAntojitos.foto = res;
+    console.log('interface', this.newAntojitos);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newAntojitos,this.pathAntojitos,this.newAntojitos.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoAntojitos();
+      this.enableNewAntojitos = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoAntojitos(){
+  this.enableNewAntojitos = true;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newAntojitos= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newAntojitos.id);
+}
+
+getProductosAntojitos(){
+  this.firestoreService.getCollection<Antojitos>(this.pathAntojitos).subscribe(   res => {
+    this.antojitos = res;
+    console.log('antojitos', res);
+  });
+}
+
+async deleteAntojitos(antojitos: Antojitos){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathAntojitos, antojitos.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadAntojitos(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileAntojitos = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newAntojitos.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
+// snacks
+
+async guardarSnacks() {
+  const path = 'snacks';
+  const name = this.newSnacks.nombre;
+  const precio = this.newSnacks.precio;
+  const foto = this.newSnacks.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileSnacks, path, name);
+    this.newSnacks.foto = res;
+    console.log('interface', this.newSnacks);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newSnacks,this.pathSnacks,this.newSnacks.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoSnacks();
+      this.enableNewSnacks = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoSnacks(){
+  this.enableNewSnacks = true;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newSnacks= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newSnacks.id);
+}
+
+getProductosSnacks(){
+  this.firestoreService.getCollection<Snacks>(this.pathSnacks).subscribe(   res => {
+    this.snacks = res;
+    console.log('snacks', res);
+  });
+}
+
+async deleteSnacks(snacks: Snacks){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathSnacks, snacks.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadSnacks(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileSnacks = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newSnacks.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
+// ensaladas
+
+async guardarEnsaladas() {
+  const path = 'ensaladas';
+  const name = this.newEnsaladas.nombre;
+  const precio = this.newEnsaladas.precio;
+  const foto = this.newEnsaladas.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileEnsaladas, path, name);
+    this.newEnsaladas.foto = res;
+    console.log('interface', this.newEnsaladas);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newEnsaladas,this.pathEnsaladas,this.newEnsaladas.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoEnsaladas();
+      this.enableNewEnsaladas = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoEnsaladas(){
+  this.enableNewEnsaladas = true;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newEnsaladas= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newEnsaladas.id);
+}
+
+getProductosEnsaladas(){
+  this.firestoreService.getCollection<Ensaladas>(this.pathEnsaladas).subscribe(   res => {
+    this.ensaladas = res;
+    console.log('ensaladas', res);
+  });
+}
+
+async deleteEnsaladas(ensaladas: Ensaladas){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathEnsaladas, ensaladas.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadEnsaladas(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileEnsaladas = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newEnsaladas.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
+// frappes
+
+async guardarFrappes() {
+  const path = 'frappes';
+  const name = this.newFrappes.nombre;
+  const precio = this.newFrappes.precio;
+  const foto = this.newFrappes.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileFrappes, path, name);
+    this.newFrappes.foto = res;
+    console.log('interface', this.newFrappes);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newFrappes,this.pathFrappes,this.newFrappes.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoFrappes();
+      this.enableNewFrappes = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoFrappes(){
+  this.enableNewFrappes = true;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newFrappes= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newFrappes.id);
+}
+
+getProductosFrappes(){
+  this.firestoreService.getCollection<Frappes>(this.pathFrappes).subscribe(   res => {
+    this.frappes = res;
+    console.log('frappes', res);
+  });
+}
+
+async deleteFrappes(frappes: Frappes){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathFrappes, frappes.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadFrappes(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileFrappes = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newFrappes.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
+// tes
+
+async guardarTes() {
+  const path = 'tes';
+  const name = this.newTes.nombre;
+  const precio = this.newTes.precio;
+  const foto = this.newTes.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileTes, path, name);
+    this.newTes.foto = res;
+    console.log('interface', this.newTes);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newTes,this.pathTes,this.newTes.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoTes();
+      this.enableNewTes = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoTes(){
+  this.enableNewTes = true;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newTes= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newTes.id);
+}
+
+getProductosTes(){
+  this.firestoreService.getCollection<Tes>(this.pathTes).subscribe(   res => {
+    this.tes = res;
+    console.log('tes', res);
+  });
+}
+
+async deleteTes(tes: Tes){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathTes, tes.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadTes(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileTes = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newTes.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
+// malteadas
+
+async guardarMalteadas() {
+  const path = 'malteadas';
+  const name = this.newMalteadas.nombre;
+  const precio = this.newMalteadas.precio;
+  const foto = this.newMalteadas.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileMalteadas, path, name);
+    this.newMalteadas.foto = res;
+    console.log('interface', this.newMalteadas);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newMalteadas,this.pathMalteadas,this.newMalteadas.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoMalteadas();
+      this.enableNewMalteadas = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoMalteadas(){
+  this.enableNewMalteadas = true;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newMalteadas= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newMalteadas.id);
+}
+
+getProductosMalteadas(){
+  this.firestoreService.getCollection<Malteadas>(this.pathMalteadas).subscribe(   res => {
+    this.malteadas = res;
+    console.log('malteadas', res);
+  });
+}
+
+async deleteMalteadas(malteadas: Malteadas){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathMalteadas, malteadas.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadMalteadas(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileMalteadas = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newMalteadas.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
+// licuados
+
+async guardarLicuados() {
+  const path = 'licuados';
+  const name = this.newLicuados.nombre;
+  const precio = this.newLicuados.precio;
+  const foto = this.newLicuados.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileLicuados, path, name);
+    this.newLicuados.foto = res;
+    console.log('interface', this.newLicuados);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newLicuados,this.pathLicuados,this.newLicuados.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoLicuados();
+      this.enableNewLicuados = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoLicuados(){
+  this.enableNewLicuados = true;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newLicuados= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newLicuados.id);
+}
+
+getProductosLicuados(){
+  this.firestoreService.getCollection<Licuados>(this.pathLicuados).subscribe(   res => {
+    this.licuados = res;
+    console.log('licuados', res);
+  });
+}
+
+async deleteLicuados(licuados: Licuados){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathLicuados, licuados.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadLicuados(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileLicuados = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newLicuados.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
+// crepas
+
+async guardarCrepas() {
+  const path = 'crepas';
+  const name = this.newCrepas.nombre;
+  const precio = this.newCrepas.precio;
+  const foto = this.newCrepas.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileCrepas, path, name);
+    this.newCrepas.foto = res;
+    console.log('interface', this.newCrepas);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newCrepas,this.pathCrepas,this.newCrepas.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoCrepas();
+      this.enableNewCrepas = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoCrepas(){
+  this.enableNewCrepas = true;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newCrepas= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newCrepas.id);
+}
+
+getProductosCrepas(){
+  this.firestoreService.getCollection<Crepas>(this.pathCrepas).subscribe(   res => {
+    this.crepas = res;
+    console.log('crepas', res);
+  });
+}
+
+async deleteCrepas(crepas: Crepas){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathCrepas, crepas.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadCrepas(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileCrepas = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newCrepas.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
+// wafles
+
+async guardarWaffles() {
+  const path = 'waffles';
+  const name = this.newWaffles.nombre;
+  const precio = this.newWaffles.precio;
+  const foto = this.newWaffles.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileWaffles, path, name);
+    this.newWaffles.foto = res;
+    console.log('interface', this.newWaffles);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newWaffles,this.pathWaffles,this.newWaffles.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoWaffles();
+      this.enableNewWaffles = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoWaffles(){
+  this.enableNewWaffles = true;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newWaffles= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newWaffles.id);
+}
+
+getProductosWaffles(){
+  this.firestoreService.getCollection<Waffles>(this.pathWaffles).subscribe(   res => {
+    this.waffles = res;
+    console.log('wafles', res);
+  });
+}
+
+async deleteWaffles(waffles: Waffles){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathWaffles, waffles.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadWaffles(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileWaffles = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newWaffles.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
 
   async presentToast(msg: string) {
     const toast = await this.toastController.create({

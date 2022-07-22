@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+          <ion-title class="titulo ion-text-wrap">
+           Antojitos
+          </ion-title>
+          <ion-buttons slot="start">
+            <ion-button (click)="salirDeCarrit()" >
+              <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+          </ion-button>
+          </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let antojitos of antojitos">
+    <app-producto [producto]= antojitos></app-producto>
+  </div>
+
+</ion-content>

@@ -17,6 +17,10 @@
       <ion-button (click)="nuevo()" style="margin: 10px;" color="dark" >bebidas </ion-button>
   </div>
 
+  <div style="text-align:end; margin: 10px;">
+    <ion-button (click)="nuevoHuevos()" style="margin: 10px;" color="dark" >huevos </ion-button>
+</div>
+
   <ion-grid>
     <ion-row class="ion-justify-content-center">
         <ion-col class="normal text-center" size="4">
@@ -64,6 +68,19 @@
     <ion-col class="normal text-center" size="4">
       <ion-button (click)="nuevoWaffles()" size="small" color="dark" >Waffles</ion-button>
     </ion-col>
+</ion-row>
+
+
+<ion-row class="ion-justify-content-center">
+  <ion-col class="normal text-center" size="4">
+    <ion-button (click)="nuevoHelados()" size="small" color="dark" >Helados</ion-button>
+  </ion-col>
+  <ion-col class="normal text-center" size="4">
+    <ion-button (click)="nuevoHotdogs()" size="small" color="dark" >Hotdogs</ion-button>
+  </ion-col>
+  <ion-col class="normal text-center" size="4">
+    <ion-button (click)="nuevoDesayunos()" size="small" color="dark" >desayunos</ion-button>
+  </ion-col>
 </ion-row>
   </ion-grid>
 
@@ -995,6 +1012,290 @@
   </ion-button>
 
       <ion-button (click)="deleteWaffles(waffles)" >
+          <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+</ion-item>
+
+</div>
+
+<!-- helados -->
+
+<div *ngIf="enableNewHelados">
+   
+  <h3 class="subtitulo encabezado">Ingrese datos del Helados</h3>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Nombre:
+    </ion-label>
+    <ion-input [(ngModel)]="newHelados.nombre" class="normal" type="text" inputmode="text" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Precio:
+    </ion-label>
+    <ion-input [(ngModel)]="newHelados.precio" class="normal" type="number" inputmode="numeric" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="normal">
+    foto
+</ion-label>
+<ion-buttons slot="end">
+<ion-button>
+<label for="file-upload">
+  <ion-icon slot="icon-only" name="images"></ion-icon>
+</label>
+ <input (change)="newImageUploadHelados($event)" id="file-upload" style="display: none" type="file"  accept="image/*" required="true">
+</ion-button>
+</ion-buttons>
+
+</ion-item>
+
+<ion-item>
+  <img class="image" [src]="newHelados.foto">
+</ion-item>
+
+  <ion-item>
+    <ion-buttons slot="end">
+        <ion-label class="normal"> Cancelar </ion-label>
+      <ion-button (click)="enableNewHelados = false">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-label  class="normal"> Guardar Helado</ion-label>
+       <ion-button (click)="guardarHelados() ">
+        <ion-icon color="primary" slot="icon-only" name="save-sharp"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <h3 class="subtitulo encabezado">lista de Helados</h3>
+
+<ion-item *ngFor="let helados of helados">
+  <ion-label class="normal">{{helados.nombre}}</ion-label>
+  <ion-buttons slot="end">
+    <ion-button (click)="newHelados = helados; enableNewHelados=true;">
+      <ion-icon  slot="icon-only" name="create-outline"></ion-icon>
+  </ion-button>
+
+      <ion-button (click)="deleteHelados(helados)" >
+          <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+</ion-item>
+
+</div>
+
+<!-- hotdogs -->
+
+<div *ngIf="enableNewHotdogs">
+   
+  <h3 class="subtitulo encabezado">Ingrese datos del Hotdogs</h3>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Nombre:
+    </ion-label>
+    <ion-input [(ngModel)]="newHotdogs.nombre" class="normal" type="text" inputmode="text" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Precio:
+    </ion-label>
+    <ion-input [(ngModel)]="newHotdogs.precio" class="normal" type="number" inputmode="numeric" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="normal">
+    foto
+</ion-label>
+<ion-buttons slot="end">
+<ion-button>
+<label for="file-upload">
+  <ion-icon slot="icon-only" name="images"></ion-icon>
+</label>
+ <input (change)="newImageUploadHotdogs($event)" id="file-upload" style="display: none" type="file"  accept="image/*" required="true">
+</ion-button>
+</ion-buttons>
+
+</ion-item>
+
+<ion-item>
+  <img class="image" [src]="newHotdogs.foto">
+</ion-item>
+
+  <ion-item>
+    <ion-buttons slot="end">
+        <ion-label class="normal"> Cancelar </ion-label>
+      <ion-button (click)="enableNewHotdogs = false">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-label  class="normal"> Guardar Hotdogs</ion-label>
+       <ion-button (click)="guardarHotdogs() ">
+        <ion-icon color="primary" slot="icon-only" name="save-sharp"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <h3 class="subtitulo encabezado">lista de Hotdogs</h3>
+
+<ion-item *ngFor="let hotdogs of hotdogs">
+  <ion-label class="normal">{{hotdogs.nombre}}</ion-label>
+  <ion-buttons slot="end">
+    <ion-button (click)="newHotdogs = hotdogs; enableNewHotdogs=true;">
+      <ion-icon  slot="icon-only" name="create-outline"></ion-icon>
+  </ion-button>
+
+      <ion-button (click)="deleteHotdogs(hotdogs)" >
+          <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+</ion-item>
+
+</div>
+
+<!-- desayunos -->
+
+<div *ngIf="enableNewDesayunos">
+   
+  <h3 class="subtitulo encabezado">Ingrese datos del Desayuno</h3>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Nombre:
+    </ion-label>
+    <ion-input [(ngModel)]="newDesayunos.nombre" class="normal" type="text" inputmode="text" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Precio:
+    </ion-label>
+    <ion-input [(ngModel)]="newDesayunos.precio" class="normal" type="number" inputmode="numeric" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="normal">
+    foto
+</ion-label>
+<ion-buttons slot="end">
+<ion-button>
+<label for="file-upload">
+  <ion-icon slot="icon-only" name="images"></ion-icon>
+</label>
+ <input (change)="newImageUploadDesayunos($event)" id="file-upload" style="display: none" type="file"  accept="image/*" required="true">
+</ion-button>
+</ion-buttons>
+
+</ion-item>
+
+<ion-item>
+  <img class="image" [src]="newDesayunos.foto">
+</ion-item>
+
+  <ion-item>
+    <ion-buttons slot="end">
+        <ion-label class="normal"> Cancelar </ion-label>
+      <ion-button (click)="enableNewDesayunos = false">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-label  class="normal"> Guardar Desayuno</ion-label>
+       <ion-button (click)="guardarDesayunos() ">
+        <ion-icon color="primary" slot="icon-only" name="save-sharp"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <h3 class="subtitulo encabezado">lista de Desayunos</h3>
+
+<ion-item *ngFor="let desayunos of desayunos">
+  <ion-label class="normal">{{desayunos.nombre}}</ion-label>
+  <ion-buttons slot="end">
+    <ion-button (click)="newDesayunos = desayunos; enableNewDesayunos=true;">
+      <ion-icon  slot="icon-only" name="create-outline"></ion-icon>
+  </ion-button>
+
+      <ion-button (click)="deleteDesayunos(desayunos)" >
+          <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+</ion-item>
+
+</div>
+
+<!-- huevos -->
+
+<div *ngIf="enableNewHuevos">
+   
+  <h3 class="subtitulo encabezado">Ingrese datos delos Huevos</h3>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Nombre:
+    </ion-label>
+    <ion-input [(ngModel)]="newHuevos.nombre" class="normal" type="text" inputmode="text" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Precio:
+    </ion-label>
+    <ion-input [(ngModel)]="newHuevos.precio" class="normal" type="number" inputmode="numeric" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="normal">
+    foto
+</ion-label>
+<ion-buttons slot="end">
+<ion-button>
+<label for="file-upload">
+  <ion-icon slot="icon-only" name="images"></ion-icon>
+</label>
+ <input (change)="newImageUploadHuevos($event)" id="file-upload" style="display: none" type="file"  accept="image/*" required="true">
+</ion-button>
+</ion-buttons>
+
+</ion-item>
+
+<ion-item>
+  <img class="image" [src]="newHuevos.foto">
+</ion-item>
+
+  <ion-item>
+    <ion-buttons slot="end">
+        <ion-label class="normal"> Cancelar </ion-label>
+      <ion-button (click)="enableNewHuevos = false">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-label  class="normal"> Guardar Huevos</ion-label>
+       <ion-button (click)="guardarHuevos() ">
+        <ion-icon color="primary" slot="icon-only" name="save-sharp"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <h3 class="subtitulo encabezado">lista de Huevos</h3>
+
+<ion-item *ngFor="let huevos of huevos">
+  <ion-label class="normal">{{huevos.nombre}}</ion-label>
+  <ion-buttons slot="end">
+    <ion-button (click)="newHuevos = huevos; enableNewHuevos=true;">
+      <ion-icon  slot="icon-only" name="create-outline"></ion-icon>
+  </ion-button>
+
+      <ion-button (click)="deleteHuevos(huevos)" >
           <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
       </ion-button>
   </ion-buttons>

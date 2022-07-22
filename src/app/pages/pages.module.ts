@@ -20,6 +20,9 @@ import { LicuadosComponent } from './licuados/licuados.component';
 import { CrepasComponent } from './crepas/crepas.component';
 import { WafflesComponent } from './waffles/waffles.component';
 import { HeladosComponent } from './helados/helados.component';
+import { HotdogsComponent } from './hotdogs/hotdogs.component';
+import { DesayunosComponent } from './desayunos/desayunos.component';
+import { HuevosComponent } from './huevos/huevos.component';
 
 
 
@@ -40,7 +43,10 @@ import { HeladosComponent } from './helados/helados.component';
     LicuadosComponent,
     CrepasComponent,
     WafflesComponent,
-    HeladosComponent
+    HeladosComponent,
+    HotdogsComponent,
+    DesayunosComponent,
+    HuevosComponent
   ],
   imports: [
     CommonModule,

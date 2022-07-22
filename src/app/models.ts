@@ -129,7 +129,7 @@ export interface Bebidas {
     fecha: Date;
 }
 
-export interface Hotdog {
+export interface Hotdogs {
     nombre: string;
     precio: number;
     foto: string;

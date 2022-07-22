@@ -19,6 +19,9 @@ import { LicuadosComponent } from './pages/licuados/licuados.component';
 import { CrepasComponent } from './pages/crepas/crepas.component';
 import { WafflesComponent } from './pages/waffles/waffles.component';
 import { HeladosComponent } from './pages/helados/helados.component';
+import { HotdogsComponent } from './pages/hotdogs/hotdogs.component';
+import { DesayunosComponent } from './pages/desayunos/desayunos.component';
+import { HuevosComponent } from './pages/huevos/huevos.component';
 
 const isAdmin = (next: any) => map( (user: any) => !!user && 'tYBTvM5thidmtFMb82x82q1WdIU2' === user.uid);
 
@@ -41,6 +44,9 @@ const routes: Routes = [
   { path: 'crepas', component:  CrepasComponent},
   { path: 'waffles', component: WafflesComponent},
   { path: 'helados', component: HeladosComponent},
+  { path: 'hotdogs', component: HotdogsComponent},
+  { path: 'desayunos', component: DesayunosComponent},
+  { path: 'huevos', component: HuevosComponent},
   { path: '**', redirectTo: 'menuoption', pathMatch: 'full'},
   {
     path: '',

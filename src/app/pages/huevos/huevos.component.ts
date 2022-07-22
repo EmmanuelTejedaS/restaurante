@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
-import { Helados } from '../../models';
+import { Huevos } from '../../models';
 import { MenuController, NavController } from '@ionic/angular';
 import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
-  selector: 'app-helados',
-  templateUrl: './helados.component.html',
-  styleUrls: ['./helados.component.scss'],
+  selector: 'app-huevos',
+  templateUrl: './huevos.component.html',
+  styleUrls: ['./huevos.component.scss'],
 })
-export class HeladosComponent implements OnInit {
-  private path = 'helados/';
-  helados: Helados[] = [];
+export class HuevosComponent implements OnInit {
+  private path = 'huevos/';
+  huevos: Huevos[] = [];
   idUsuario = '';
   constructor(public menu: MenuController,
     public firestoreService: FirestoreService,
@@ -27,13 +27,14 @@ export class HeladosComponent implements OnInit {
   }
 
   loadProductos() {
-    this.firestoreService.getCollection<Helados>(this.path).subscribe(   res => {
-      this.helados = res;
-      console.log('helados', res);
+    this.firestoreService.getCollection<Huevos>(this.path).subscribe(   res => {
+      this.huevos = res;
+      console.log('huevos', res);
     });
 }
 
 salirDeCarrit(){
   this.navCtrl.navigateForward('/');
 }
+
 }

@@ -220,6 +220,21 @@ export class ConfigProductosComponent implements OnInit {
     this.enableNewProductos = true;
     this.enableNewPostres = false;
     this.enableNewBebidas = false;
+
+    this.enableNewHuevos = false;
+    this.enableNewDesayunos = false;
+    this.enableNewHotdogs = false;
+    this.enableNewHelados = false;
+    this.enableNewWaffles = false;
+    this.enableNewCrepas = false;
+    this.enableNewLicuados = false;
+    this.enableNewMalteadas = false;
+    this.enableNewTes = false;
+    this.enableNewFrappes = false;
+    this.enableNewEnsaladas = false;
+    this.enableNewSnacks = false;
+    this.enableNewAntojitos = false;
+    this.enableNewQuesadillas = false;
     this.newProducto= {
       nombre: '',
       precio: null,
@@ -232,6 +247,23 @@ export class ConfigProductosComponent implements OnInit {
 
   nuevoPostres(){
     this.enableNewPostres = true;
+    this.enableNewProductos = false;
+
+    this.enableNewHuevos = false;
+    this.enableNewDesayunos = false;
+    this.enableNewHotdogs = false;
+    this.enableNewHelados = false;
+    this.enableNewWaffles = false;
+    this.enableNewCrepas = false;
+    this.enableNewLicuados = false;
+    this.enableNewMalteadas = false;
+    this.enableNewTes = false;
+    this.enableNewFrappes = false;
+    this.enableNewEnsaladas = false;
+    this.enableNewSnacks = false;
+    this.enableNewAntojitos = false;
+    this.enableNewQuesadillas = false;
+    this.enableNewBebidas = false;
     this.enableNewProductos = false;
     this.newPostres= {
       nombre: '',
@@ -395,6 +427,22 @@ export class ConfigProductosComponent implements OnInit {
     this.enableNewBebidas = true;
     this.enableNewPostres = false;
     this.enableNewProductos = false;
+
+    this.enableNewHuevos = false;
+    this.enableNewDesayunos = false;
+    this.enableNewHotdogs = false;
+    this.enableNewHelados = false;
+    this.enableNewWaffles = false;
+    this.enableNewCrepas = false;
+    this.enableNewLicuados = false;
+    this.enableNewMalteadas = false;
+    this.enableNewTes = false;
+    this.enableNewFrappes = false;
+    this.enableNewEnsaladas = false;
+    this.enableNewSnacks = false;
+    this.enableNewAntojitos = false;
+    this.enableNewQuesadillas = false;
+    this.enableNewBebidas = false;
     this.newBebidas= {
       nombre: '',
       precio: null,
@@ -494,6 +542,20 @@ nuevoQuesadillas(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
   this.newQuesadillas= {
     nombre: '',
     precio: null,
@@ -594,6 +656,19 @@ nuevoAntojitos(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
   this.newAntojitos= {
     nombre: '',
     precio: null,
@@ -695,6 +770,18 @@ nuevoSnacks(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
   this.newSnacks= {
     nombre: '',
     precio: null,
@@ -797,6 +884,17 @@ nuevoEnsaladas(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
   this.newEnsaladas= {
     nombre: '',
     precio: null,
@@ -900,6 +998,16 @@ nuevoFrappes(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
   this.newFrappes= {
     nombre: '',
     precio: null,
@@ -1004,6 +1112,16 @@ nuevoTes(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewBebidas = false;
   this.newTes= {
     nombre: '',
     precio: null,
@@ -1109,6 +1227,14 @@ nuevoMalteadas(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
   this.newMalteadas= {
     nombre: '',
     precio: null,
@@ -1215,6 +1341,13 @@ nuevoLicuados(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
   this.newLicuados= {
     nombre: '',
     precio: null,
@@ -1322,6 +1455,12 @@ nuevoCrepas(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos =false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
   this.newCrepas= {
     nombre: '',
     precio: null,
@@ -1430,6 +1569,11 @@ nuevoWaffles(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
   this.newWaffles= {
     nombre: '',
     precio: null,
@@ -1539,6 +1683,10 @@ nuevoHelados(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
   this.newHelados= {
     nombre: '',
     precio: null,
@@ -1649,6 +1797,9 @@ nuevoHotdogs(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
   this.newHotdogs= {
     nombre: '',
     precio: null,
@@ -1760,6 +1911,8 @@ nuevoDesayunos(){
   this.enableNewBebidas = false;
   this.enableNewPostres = false;
   this.enableNewProductos = false;
+
+  this.enableNewHuevos = false;
   this.newDesayunos= {
     nombre: '',
     precio: null,

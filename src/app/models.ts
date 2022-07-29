@@ -153,3 +153,19 @@ export interface Huevos {
     fecha: Date;
 }
 
+export interface Menu {
+    nombre: string;
+    precio: number;
+    foto: string;
+    id: string;
+    fecha: Date;
+}
+
+export interface Promociones {
+    nombre: string;
+    precio: number;
+    foto: string;
+    id: string;
+    fecha: Date;
+}
+

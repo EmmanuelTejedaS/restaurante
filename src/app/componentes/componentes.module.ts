@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProductoComponent } from './producto/producto.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ], exports: [
     ProductoComponent
   ]

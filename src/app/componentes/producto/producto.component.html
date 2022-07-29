@@ -1,23 +1,36 @@
 <ion-card>
   <ion-item>
-    <!-- <ion-icon name="flame-outline" slot="start"></ion-icon> -->
-      <h1 class="titulo">{{producto.nombre}}</h1>
+      <h1 class="titulo">{{producto.nombre}} </h1>
   </ion-item>
 
   <ion-card-content>
     <ion-img class="img-producto" [src]="producto.foto"></ion-img>
-    <h1 class="precio">Precio: {{producto.precio}}$</h1>
-      <!-- <h1 class="precio">Pagar con:</h1> -->
-      <ion-button size="small" fill="outline" color="success" >comprar</ion-button> 
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="precio" size="6">
+        <h1 class="precio">Precio: $ {{producto.precio}}</h1>
+      </ion-col>
 
-    <!-- <ion-row class="ion-justify-content-center">
-      <ion-col class="normal text-center"style="border-right: 1px solid #6c757d;">
-        <ion-button (click)="presentAlert()" expand="block" size="small" fill="outline" color="success">Efectivo</ion-button>
+      <ion-col class="text-center" size="6">
+        <ion-select placeholder="cantidad"
+  [(ngModel)]="selectedOption"
+  (ionChange)="ionChange()">
+  <ion-select-option value= 1> 1</ion-select-option>
+  <ion-select-option value= 2> 2</ion-select-option>
+  <ion-select-option value= 3> 3</ion-select-option>
+  <ion-select-option value= 4> 4 </ion-select-option>
+  <ion-select-option value= 5> 5</ion-select-option>
+  <ion-select-option value= 6> 6</ion-select-option>
+  <ion-select-option value= 7> 7 </ion-select-option>
+  <ion-select-option value= 8> 8 </ion-select-option>
+  <ion-select-option value= 1>9 </ion-select-option>
+ </ion-select>
       </ion-col>
-      <ion-col class="normal text-center">
-        <ion-button (click)="presentAlert()" expand="block" size="small" fill="outline" color="success">Tarjeta</ion-button> 
-      </ion-col>
-  </ion-row> -->
-   
+    </ion-row>
+  </ion-grid>
+    <!-- <h1 class="precio">Precio: $ {{producto.precio}}</h1> -->
+      <ion-button size="small" fill="outline" color="success" href="https://wa.me/522711873715?text=Me%20gustaria%20ordenar%20lo%20siguiente%20:%20{{cantidad}}%20{{producto.nombre}}">comprar por whatsapp</ion-button> 
+
+
   </ion-card-content>
 </ion-card>

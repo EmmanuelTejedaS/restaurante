@@ -1,0 +1,6 @@
+{
+	"appId": "com.makoslunch.makos",
+	"appName": "makos",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

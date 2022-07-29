@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { FirestoreService } from '../../services/firestore.service';
 // eslint-disable-next-line max-len
-import { Postres, Producto, Bebidas, Quesadillas, Antojitos, Snacks, Ensaladas, Frappes, Tes, Malteadas, Licuados, Crepas, Waffles, Helados, Hotdogs, Desayunos, Huevos } from '../../models';
+import { Postres, Producto, Bebidas, Quesadillas, Antojitos, Snacks, Ensaladas, Frappes, Tes, Malteadas, Licuados, Crepas, Waffles, Helados, Hotdogs, Desayunos, Huevos, Menu, Promociones } from '../../models';
 import { FirestorageService } from '../../services/firestorage.service';
 
 @Component({
@@ -131,6 +131,23 @@ export class ConfigProductosComponent implements OnInit {
   newFileHuevos: '';
   pathHuevos= 'huevos';
 
+  menuDia: Menu[] = [];
+  newMenu: Menu;
+  enableNewMenu= false;
+  newImageMenu= '';
+  newFileMenu: '';
+  pathMenu= 'menu';
+
+  promociones: Promociones[] = [];
+  newPromociones: Promociones;
+  enableNewPromociones= false;
+  newImagePromociones= '';
+  newFilePromociones: '';
+  pathPromociones= 'promociones';
+
+  verMenu = false;
+  verBoton = true;
+
   constructor(public menu: MenuController,
               public firestoreService: FirestoreService,
               public loadingController: LoadingController,
@@ -157,6 +174,8 @@ export class ConfigProductosComponent implements OnInit {
     this.getProductosHotdogs();
     this.getProductosDesayunos();
     this.getProductosHuevos();
+    this.getProductosMenu();
+    this.getProductosPromociones();
   }
 
   openMenu(){
@@ -2090,6 +2109,234 @@ async newImageUploadHuevos(event: any) {
    reader.readAsDataURL(event.target.files[0]);
  }
 }
+
+// menu Dia
+
+async guardarMenu() {
+  const path = 'menu';
+  const name = this.newMenu.nombre;
+  const precio = this.newMenu.precio;
+  const foto = this.newMenu.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFileMenu, path, name);
+    this.newMenu.foto = res;
+    console.log('interface', this.newMenu);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newMenu,this.pathMenu,this.newMenu.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoMenu();
+      this.enableNewMenu = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoMenu(){
+  this.enableNewMenu = true;
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newMenu= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newMenu.id);
+}
+
+getProductosMenu(){
+  this.firestoreService.getCollection<Menu>(this.pathMenu).subscribe(   res => {
+    this.menuDia = res;
+    console.log('menu', res);
+  });
+}
+
+async deleteMenu(menuDia: Menu){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathMenu, menuDia.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadMenu(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFileMenu = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newMenu.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
+//promociones
+
+async guardarPromociones() {
+  const path = 'promociones';
+  const name = this.newPromociones.nombre;
+  const precio = this.newPromociones.precio;
+  const foto = this.newPromociones.foto;
+  if(name.length && precio){
+    this.presentLoading();
+    const res = await this.firestorageService.uploadImage(this.newFilePromociones, path, name);
+    this.newPromociones.foto = res;
+    console.log('interface', this.newPromociones);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    this.firestoreService.createDoc(this.newPromociones,this.pathPromociones,this.newPromociones.id).then( res => {
+      console.log('guardado con exito');
+      this.presentToast('guardado con exito');
+      this.nuevoPromociones();
+      this.enableNewPromociones = false;
+      this.loading.dismiss();
+    }).catch(   error => {
+      console.log(error);
+      this.presentToast('error al guardar');
+    });
+  }else{
+    console.log('agrega dato');
+  }
+}
+
+nuevoPromociones(){
+  this.enableNewPromociones = true;
+  this.enableNewMenu = false;
+  this.enableNewHuevos = false;
+  this.enableNewDesayunos = false;
+  this.enableNewHotdogs = false;
+  this.enableNewHelados = false;
+  this.enableNewWaffles = false;
+  this.enableNewCrepas = false;
+  this.enableNewLicuados = false;
+  this.enableNewMalteadas = false;
+  this.enableNewTes = false;
+  this.enableNewFrappes = false;
+  this.enableNewEnsaladas = false;
+  this.enableNewSnacks = false;
+  this.enableNewAntojitos = false;
+  this.enableNewQuesadillas = false;
+  this.enableNewBebidas = false;
+  this.enableNewPostres = false;
+  this.enableNewProductos = false;
+  this.newPromociones= {
+    nombre: '',
+    precio: null,
+    foto: '',
+    id: this.firestoreService.getId(),
+    fecha: new Date()
+  };
+  console.log(this.newPromociones.id);
+}
+
+getProductosPromociones(){
+  this.firestoreService.getCollection<Promociones>(this.pathPromociones).subscribe(   res => {
+    this.promociones = res;
+    console.log('promociones', res);
+  });
+}
+
+async deletePromociones(promociones: Promociones){
+  const alert = await this.alertController.create({
+    cssClass: 'normal',
+    header: 'Advertencia',
+    message: ' Seguro desea <strong>eliminar</strong> este producto',
+    buttons: [
+      {
+        text: 'cancelar',
+        role: 'cancel',
+        cssClass: 'normal',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Ok',
+        handler: () => {
+          console.log('Confirm Okay');
+          this.firestoreService.deleteDoc(this.pathPromociones, promociones.id).then( res => {
+            // this.presentToast('eliminado con exito');
+            console.log('borrado');
+            console.log('res', res);
+            this.presentToast('eliminado con exito');
+            // this.alertController.dismiss();
+          }).catch( error => {
+              // this.presentToast('no se pude eliminar');
+              console.log('no se pudo borrar');
+              this.presentToast('no se pude eliminar');
+              console.log('error', error);
+          });
+        }
+      }
+    ]
+  });
+  await alert.present();
+  // this.firestoreService.deleteDoc(this.path, producto.id);
+}
+
+async newImageUploadPromociones(event: any) {
+  console.log('foto');
+  if (event.target.files && event.target.files[0]) {
+    this.newFilePromociones = event.target.files[0];
+   const reader = new FileReader();
+   reader.onload = ((image) => {
+       this.newPromociones.foto = image.target.result as string;
+   });
+   reader.readAsDataURL(event.target.files[0]);
+ }
+}
+
 
   async presentToast(msg: string) {
     const toast = await this.toastController.create({

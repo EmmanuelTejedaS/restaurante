@@ -12,25 +12,39 @@
 </ion-header>
 
 <ion-content>
-
-  <div style="text-align:end; margin: 10px;">
-      <ion-button (click)="nuevo()" style="margin: 10px;" color="dark" >bebidas </ion-button>
+  <div *ngIf="verBoton">
+    <!-- <ion-button (click)="verMenu=true; verBoton = false;">opciones</ion-button> -->
+    
+ <ion-item>
+    <ion-buttons slot="start">
+        <ion-label class="normal"> opciones </ion-label>
+      <ion-button (click)="verMenu=true; verBoton = false;" >
+        <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
   </div>
 
-  <div style="text-align:end; margin: 10px;">
-    <ion-button (click)="nuevoHuevos()" style="margin: 10px;" color="dark" >huevos </ion-button>
-</div>
+<div *ngIf="verMenu">
+  <ion-item>
+    <ion-buttons slot="end">
+        <ion-label class="normal"> Cancelar </ion-label>
+      <ion-button (click)="verMenu = false; verBoton = true;" >
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
 
   <ion-grid>
     <ion-row class="ion-justify-content-center">
         <ion-col class="normal text-center" size="4">
-          <ion-button (click)="nuevoPostres()" size="small" color="dark" >postres</ion-button>
+          <ion-button (click)="nuevoPostres()" size="small" color="dark" >postre</ion-button>
         </ion-col>
         <ion-col class="normal text-center" size="4">
-          <ion-button (click)="nuevoBebidas()" size="small" color="dark" (click)="path = 'hamburguesas' ">hamburguesas</ion-button>
+          <ion-button (click)="nuevoBebidas()" size="small" color="dark" (click)="path = 'hamburguesas' ">hamburguesa</ion-button>
         </ion-col>
         <ion-col class="normal text-center" size="4">
-          <ion-button (click)="nuevoQuesadillas()" size="small" color="dark" >Quesadillas</ion-button>
+          <ion-button (click)="nuevoQuesadillas()" size="small" color="dark" >Quesadilla</ion-button>
         </ion-col>
     </ion-row>
 
@@ -82,7 +96,24 @@
     <ion-button (click)="nuevoDesayunos()" size="small" color="dark" >desayunos</ion-button>
   </ion-col>
 </ion-row>
+
+<ion-row class="ion-justify-content-center">
+  <ion-col class="normal text-center" size="4">
+    <ion-button (click)="nuevo()" style="margin: 10px;" color="dark" >bebidas </ion-button>
+  </ion-col>
+  <ion-col class="normal text-center" size="4">
+    <ion-button (click)="nuevoHuevos()" style="margin: 10px;" color="dark" >huevos </ion-button>
+  </ion-col>
+  <ion-col class="normal text-center" size="4">
+    <ion-button (click)="nuevoMenu()" style="margin: 10px;" color="dark" >menu </ion-button>
+  </ion-col>
+</ion-row>
+<div style="text-align:end; margin: 10px;">
+  <ion-button (click)="nuevoPromociones()" style="margin: 10px;" color="dark" >promociones</ion-button>
+</div>
   </ion-grid>
+
+</div>
 
   <div *ngIf="enableNewProductos">
         
@@ -1296,6 +1327,148 @@
   </ion-button>
 
       <ion-button (click)="deleteHuevos(huevos)" >
+          <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+</ion-item>
+
+</div>
+
+<!-- menu -->
+
+<div *ngIf="enableNewMenu">
+   
+  <h3 class="subtitulo encabezado">Ingrese datos del menu del dia</h3>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Nombre:
+    </ion-label>
+    <ion-input [(ngModel)]="newMenu.nombre" class="normal" type="text" inputmode="text" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Precio:
+    </ion-label>
+    <ion-input [(ngModel)]="newMenu.precio" class="normal" type="number" inputmode="numeric" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="normal">
+    foto
+</ion-label>
+<ion-buttons slot="end">
+<ion-button>
+<label for="file-upload">
+  <ion-icon slot="icon-only" name="images"></ion-icon>
+</label>
+ <input (change)="newImageUploadMenu($event)" id="file-upload" style="display: none" type="file"  accept="image/*" required="true">
+</ion-button>
+</ion-buttons>
+
+</ion-item>
+
+<ion-item>
+  <img class="image" [src]="newMenu.foto">
+</ion-item>
+
+  <ion-item>
+    <ion-buttons slot="end">
+        <ion-label class="normal"> Cancelar </ion-label>
+      <ion-button (click)="enableNewMenu = false">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-label  class="normal"> Guardar menu</ion-label>
+       <ion-button (click)="guardarMenu() ">
+        <ion-icon color="primary" slot="icon-only" name="save-sharp"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <h3 class="subtitulo encabezado">lista de menu</h3>
+
+<ion-item *ngFor="let menu of menuDia">
+  <ion-label class="normal">{{menu.nombre}}</ion-label>
+  <ion-buttons slot="end">
+    <ion-button (click)="newMenu = menu; enableNewMenu=true;">
+      <ion-icon  slot="icon-only" name="create-outline"></ion-icon>
+  </ion-button>
+
+      <ion-button (click)="deleteMenu(menu)" >
+          <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+</ion-item>
+
+</div>
+
+<!-- promociones -->
+
+<div *ngIf="enableNewPromociones">
+   
+  <h3 class="subtitulo encabezado">Ingrese datos dela promocion</h3>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Nombre:
+    </ion-label>
+    <ion-input [(ngModel)]="newPromociones.nombre" class="normal" type="text" inputmode="text" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label class="normal" position="floating">
+            Precio:
+    </ion-label>
+    <ion-input [(ngModel)]="newPromociones.precio" class="normal" type="number" inputmode="numeric" required="true">
+    </ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label class="normal">
+    foto
+</ion-label>
+<ion-buttons slot="end">
+<ion-button>
+<label for="file-upload">
+  <ion-icon slot="icon-only" name="images"></ion-icon>
+</label>
+ <input (change)="newImageUploadPromociones($event)" id="file-upload" style="display: none" type="file"  accept="image/*" required="true">
+</ion-button>
+</ion-buttons>
+
+</ion-item>
+
+<ion-item>
+  <img class="image" [src]="newPromociones.foto">
+</ion-item>
+
+  <ion-item>
+    <ion-buttons slot="end">
+        <ion-label class="normal"> Cancelar </ion-label>
+      <ion-button (click)="enableNewPromociones = false">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-label  class="normal"> Guardar promocion</ion-label>
+       <ion-button (click)="guardarPromociones() ">
+        <ion-icon color="primary" slot="icon-only" name="save-sharp"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <h3 class="subtitulo encabezado">lista de promociones</h3>
+
+<ion-item *ngFor="let promociones of promociones">
+  <ion-label class="normal">{{promociones.nombre}}</ion-label>
+  <ion-buttons slot="end">
+    <ion-button (click)="newPromociones = promociones; enableNewPromociones=true;">
+      <ion-icon  slot="icon-only" name="create-outline"></ion-icon>
+  </ion-button>
+
+      <ion-button (click)="deletePromociones(promociones)" >
           <ion-icon  slot="icon-only" color="danger" name="trash-outline"></ion-icon>
       </ion-button>
   </ion-buttons>
